@@ -1,7 +1,8 @@
+import "./MissionList.css";
+import { default as missionsIn } from "../../data/missions.json";
+import { createID } from "../../util/utilityFunctions";
 import { useState } from "react";
 import MissionTile from "./MissionTile";
-import { default as missionsIn } from "../../util/missions.json";
-import "./MissionList.css";
 
 const MissionList = () => {
   const [missions] = useState<MissionData[]>(missionsIn);
@@ -10,7 +11,7 @@ const MissionList = () => {
     <ul>
       {missions &&
         missions.map((mission) => (
-          <MissionTile data={mission} key={Math.random() * 10000} />
+          <MissionTile data={mission} key={createID(mission.gameID)} />
         ))}
     </ul>
   );
