@@ -1,5 +1,11 @@
-const App: React.FunctionComponent = (): React.JSX.Element => {
-  return <></>;
+import MissionList from "./components/missions/MissionList";
+
+const App = () => {
+  return (
+    <>
+      <MissionList />
+    </>
+  );
 };
 
 export default App;
