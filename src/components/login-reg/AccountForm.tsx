@@ -45,7 +45,7 @@ const AccountForm = () => {
     setFormState((prevState) => (prevState === "login" ? "register" : "login"));
   };
 
-  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -56,7 +56,9 @@ const AccountForm = () => {
     }));
   };
 
-  const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+  const submitHandler = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
     await axios
       .post(
