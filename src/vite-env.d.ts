@@ -4,6 +4,7 @@ interface AccountFormData {
   username: string;
   email: string;
   password: string;
+  cPassword: string;
 }
 
 interface PlayerData {

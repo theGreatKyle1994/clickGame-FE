@@ -6,6 +6,14 @@ const Registration = () => {
     username: "",
     email: "",
     password: "",
+    cPassword: "",
+  });
+
+  const [formErrors, setFormErrors] = useState<AccountFormData>({
+    username: "",
+    email: "",
+    password: "",
+    cPassword: "",
   });
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,13 +28,30 @@ const Registration = () => {
     e.preventDefault();
     await axios
       .post("http://localhost:8000/create-account", formData)
-      .then((data) => console.log(data))
+      .then((res) => {
+        if (!res.data.errors) {
+          setFormData({
+            username: "",
+            email: "",
+            password: "",
+            cPassword: "",
+          });
+        }
+        setFormErrors({
+          username: res.data.errors?.username?.message || "",
+          email: res.data.errors?.email?.message || "",
+          password: res.data.errors?.password?.message || "",
+          cPassword: res.data.errors?.cPassword?.message || "",
+        });
+        console.log(res);
+      })
       .catch((err) => console.log(err));
   };
 
   return (
     <form onSubmit={submitHandler}>
       <div>
+        <div>{formErrors.username}</div>
         <label htmlFor="username">Username:</label>
         <input
           onChange={changeHandler}
@@ -34,10 +59,10 @@ const Registration = () => {
           name="username"
           type="text"
           value={formData.username}
-          required
         />
       </div>
       <div>
+        <div>{formErrors.email}</div>
         <label htmlFor="email">Email:</label>
         <input
           onChange={changeHandler}
@@ -45,10 +70,10 @@ const Registration = () => {
           name="email"
           type="email"
           value={formData.email}
-          required
         />
       </div>
       <div>
+        <div>{formErrors.password}</div>
         <label htmlFor="password">Password:</label>
         <input
           onChange={changeHandler}
@@ -56,7 +81,17 @@ const Registration = () => {
           name="password"
           type="password"
           value={formData.password}
-          required
+        />
+      </div>
+      <div>
+        <div>{formErrors.cPassword}</div>
+        <label htmlFor="c-password">Confirm Password:</label>
+        <input
+          onChange={changeHandler}
+          id="c-password"
+          name="cPassword"
+          type="password"
+          value={formData.cPassword}
         />
       </div>
       <button type="submit">Create Account</button>
