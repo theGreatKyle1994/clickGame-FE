@@ -1,4 +1,6 @@
-const LoginRegistration = (props: LoginRegistrationProps) => {
+const LoginRegistration: React.FunctionComponent<LoginRegistrationProps> = (
+  props: LoginRegistrationProps
+): React.JSX.Element => {
   const { formData, submitHandler, changeHandler, formState } = props;
   return (
     <form onSubmit={submitHandler}>

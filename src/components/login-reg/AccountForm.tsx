@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import LoginRegistration from "./Registration";
 
-const AccountForm = () => {
+const AccountForm: React.FunctionComponent = (): React.JSX.Element => {
   const [formState, setFormState] = useState<"login" | "register">("login");
   const [formData, setFormData] = useState<AccountFormData>({
     username: {
