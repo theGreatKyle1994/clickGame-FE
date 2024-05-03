@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
-import Registration from "./Registration";
+import LoginRegistration from "./Registration";
 
 const AccountForm = () => {
+  const [formState, setFormState] = useState<"login" | "register">("login");
   const [formData, setFormData] = useState<AccountFormData>({
     username: {
       value: "",
@@ -22,6 +23,28 @@ const AccountForm = () => {
     },
   });
 
+  const formStateHandler = (): void => {
+    setFormData((prevData) => ({
+      username: {
+        ...prevData.username,
+        value: "",
+      },
+      email: {
+        ...prevData.email,
+        value: "",
+      },
+      password: {
+        ...prevData.password,
+        value: "",
+      },
+      cPassword: {
+        ...prevData.cPassword,
+        value: "",
+      },
+    }));
+    setFormState((prevState) => (prevState === "login" ? "register" : "login"));
+  };
+
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -36,12 +59,17 @@ const AccountForm = () => {
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await axios
-      .post("http://localhost:8000/create-account", {
-        username: formData.username.value,
-        email: formData.email.value,
-        password: formData.password.value,
-        cPassword: formData.cPassword.value,
-      })
+      .post(
+        `http://localhost:8000/${
+          formState === "register" ? "create-account" : "login"
+        }`,
+        {
+          username: formData.username.value,
+          email: formData.email.value,
+          password: formData.password.value,
+          cPassword: formData.cPassword.value,
+        }
+      )
       .then((res) => {
         setFormData((prevData) => ({
           username: {
@@ -68,11 +96,17 @@ const AccountForm = () => {
 
   return (
     <>
-      <Registration
+      <LoginRegistration
         formData={formData}
+        formState={formState}
         submitHandler={submitHandler}
         changeHandler={changeHandler}
       />
+      <button onClick={formStateHandler}>
+        {formState === "login"
+          ? "Need an Account? (Register)"
+          : "Have an Account? (Login)"}
+      </button>
     </>
   );
 };

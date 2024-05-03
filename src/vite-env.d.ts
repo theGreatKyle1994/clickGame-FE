@@ -19,8 +19,9 @@ interface AccountFormData {
   };
 }
 
-interface FormProps {
+interface LoginRegistrationProps {
   formData: AccountFormData;
+  formState: "login" | "register";
   submitHandler: (e: React.FormEvent<HTMLFormElement>) => void;
   changeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

@@ -1,5 +1,5 @@
-const Registration = (props: FormProps) => {
-  const { formData, submitHandler, changeHandler } = props;
+const LoginRegistration = (props: LoginRegistrationProps) => {
+  const { formData, submitHandler, changeHandler, formState } = props;
   return (
     <form onSubmit={submitHandler}>
       <div>
@@ -35,20 +35,24 @@ const Registration = (props: FormProps) => {
           value={formData.password.value}
         />
       </div>
-      <div>
-        <div>{formData.cPassword.errMsg}</div>
-        <label htmlFor="c-password">Confirm Password:</label>
-        <input
-          onChange={changeHandler}
-          id="c-password"
-          name="cPassword"
-          type="password"
-          value={formData.cPassword.value}
-        />
-      </div>
-      <button type="submit">Create Account</button>
+      {formState === "register" && (
+        <div>
+          <div>{formData.cPassword.errMsg}</div>
+          <label htmlFor="c-password">Confirm Password:</label>
+          <input
+            onChange={changeHandler}
+            id="c-password"
+            name="cPassword"
+            type="password"
+            value={formData.cPassword.value}
+          />
+        </div>
+      )}
+      <button type="submit">
+        {formState === "login" ? "Login" : "Create Account"}
+      </button>
     </form>
   );
 };
 
-export default Registration;
+export default LoginRegistration;
