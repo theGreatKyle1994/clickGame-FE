@@ -24,21 +24,21 @@ const AccountForm: React.FunctionComponent = (): React.JSX.Element => {
   });
 
   const formStateHandler = (): void => {
-    setFormData((prevData) => ({
+    setFormData(() => ({
       username: {
-        ...prevData.username,
+        errMsg: "",
         value: "",
       },
       email: {
-        ...prevData.email,
+        errMsg: "",
         value: "",
       },
       password: {
-        ...prevData.password,
+        errMsg: "",
         value: "",
       },
       cPassword: {
-        ...prevData.cPassword,
+        errMsg: "",
         value: "",
       },
     }));
@@ -75,20 +75,20 @@ const AccountForm: React.FunctionComponent = (): React.JSX.Element => {
       .then((res) => {
         setFormData((prevData) => ({
           username: {
-            value: !res.data.errors ? "" : prevData.username.value,
-            errMsg: res.data.errors?.username?.message || "",
+            value: !res.data?.errors ? "" : prevData.username.value,
+            errMsg: res.data?.errors?.username?.message || "",
           },
           email: {
-            value: !res.data.errors ? "" : prevData.email.value,
-            errMsg: res.data.errors?.email?.message || "",
+            value: !res.data?.errors ? "" : prevData.email.value,
+            errMsg: res.data?.errors?.email?.message || "",
           },
           password: {
-            value: !res.data.errors ? "" : prevData.password.value,
-            errMsg: res.data.errors?.password?.message || "",
+            value: !res.data?.errors ? "" : prevData.password.value,
+            errMsg: res.data?.errors?.password?.message || "",
           },
           cPassword: {
-            value: !res.data.errors ? "" : prevData.cPassword.value,
-            errMsg: res.data.errors?.cPassword?.message || "",
+            value: !res.data?.errors ? "" : prevData.cPassword.value,
+            errMsg: res.data?.errors?.cPassword?.message || "",
           },
         }));
         console.log(res);

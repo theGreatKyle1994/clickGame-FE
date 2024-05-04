@@ -15,17 +15,19 @@ const LoginRegistration: React.FunctionComponent<LoginRegistrationProps> = (
           value={formData.username.value}
         />
       </div>
-      <div>
-        <div>{formData.email.errMsg}</div>
-        <label htmlFor="email">Email:</label>
-        <input
-          onChange={changeHandler}
-          id="email"
-          name="email"
-          type="email"
-          value={formData.email.value}
-        />
-      </div>
+      {formState === "register" && (
+        <div>
+          <div>{formData.email.errMsg}</div>
+          <label htmlFor="email">Email:</label>
+          <input
+            onChange={changeHandler}
+            id="email"
+            name="email"
+            type="email"
+            value={formData.email.value}
+          />
+        </div>
+      )}
       <div>
         <div>{formData.password.errMsg}</div>
         <label htmlFor="password">Password:</label>
