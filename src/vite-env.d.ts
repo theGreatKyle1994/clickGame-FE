@@ -35,7 +35,7 @@ interface PlayerData {
 interface MissionData {
   gameID: string;
   title: string;
-  cost: {};
+  cost: number;
 }
 
 interface MissionTileProps {

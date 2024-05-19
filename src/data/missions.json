@@ -1,0 +1,17 @@
+[
+  {
+    "gameID": "A1M1",
+    "title": "M1",
+    "cost": 100
+  },
+  {
+    "gameID": "A1M2",
+    "title": "M2",
+    "cost": 200
+  },
+  {
+    "gameID": "A1M3",
+    "title": "M3",
+    "cost": 300
+  }
+]
