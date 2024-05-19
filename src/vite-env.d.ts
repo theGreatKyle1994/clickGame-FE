@@ -36,6 +36,10 @@ interface MissionData {
   gameID: string;
   title: string;
   cost: number;
+  level: number;
+  description: string;
+  progress: number;
+  progressMax: number;
 }
 
 interface MissionTileProps {
